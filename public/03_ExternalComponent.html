@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Hello, WebVR! - A-Frame</title>
+      <meta name="description" content="Hello, WebVR! - A-Frame">
+      <!--  note we are using 1.1.0 as most recent -->
+      <script src="/js/aframe.min.js"></script>
+      <script src="js/aframe-environment-component.min.js"></script>
+    </head>
+    <body>
+      <a-scene timeout="10000">
+          <!-- pre-load assets like images/models/etc. -->
+          <!-- this is so the web page can cache/download assets locally -->
+        <a-assets>
+            <!-- will texture sphere with this spherical earth map-->
+            <img id="earth_map" src="assets/2k_earth_daymap.jpg" crossorigin="anonymous">
+
+            <img id="earth_img" src="assets/Earth.jpg" crossorigin="anonymous">
+            <img id="mars_img" src="assets/MarsSurface.jpg" crossorigin="anonymous">
+
+            <!-- this is used for non-html assets -->
+            <a-asset-item id="mars_model" response-type="arraybuffer" src="assets/mars.glb"></a-asset-item>
+        </a-assets>
+
+        <!-- A-ENTITY is basically the world's background -->
+
+        <!-- EARTH sphere and map -->
+        <a-entity id="earth" 
+                  position="0 3.5 -6.0" 
+                  rotation="0 0 0"
+                  scale = "1 1 1"
+                  geometry="primitive:sphere; radius:2.0;"
+                  material="src:#earth_map;"></a-entity>
+
+        <a-entity id="earth_plane" 
+                  position="0 0.5 -4.0" 
+                  rotation = "-30 0 0"
+                  scale ="1 1 1"
+                  geometry="primitive:plane; width:1.5; height:1.0;"
+                  material="src:#earth_img;"></a-entity>
+
+        <!-- MARS sphere and map -->
+        <a-entity id="mars" 
+                  position="6 3.5 0" 
+                  rotation="-30 0 0"
+                  scale = "1 1 1"
+                  geometry="primitive:sphere; radius:2.0;"
+                  gltf-model="#mars_model"></a-entity>
+
+        <a-entity id="mars_plane" 
+                  position="4.0 0.5 0" 
+                  rotation = "-30 -90 0"
+                  scale ="1 1 1"
+                  geometry="primitive:plane; width:1.5; height:1.0;"
+                  material="src:#mars_img;"></a-entity>
+
+        <!-- World ground/sky -->
+        <a-entity environment="preset:default;"></a-entity>
+
+        </a-scene>
+    </body>
+</html>

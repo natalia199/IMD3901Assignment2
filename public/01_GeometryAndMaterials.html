@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Hello, WebVR! - A-Frame</title>
+      <meta name="description" content="Hello, WebVR! - A-Frame">
+      <!--  note we are using 1.1.0 as most recent -->
+      <script src="/js/aframe.min.js"></script>
+    </head>
+    <body>
+      <a-scene>
+        <!-- make sure all a-entities are within a-scene-->
+      
+      <a-entity id="box" 
+                position="0 2.0 -3.0" 
+                geometry="primitive:box; width:3.0; height:4.0; depth:1.0;" 
+                material="color:#FF0000;"></a-entity>
+
+      <a-entity id="plane" 
+                position="0 0 0" 
+                rotation = "-90 0 0"
+                scale ="10 10 10"
+                geometry="primitive:plane; width:1.0; height:1.0;" 
+                material="color:rgb(0, 255, 0);"></a-entity>
+
+      <a-entity id="sphere" 
+                position="0 4.0 -3.0;" 
+                geometry="primitive:sphere; radius:1.0;" 
+                material="color:blue;"></a-entity>
+    </a-scene>
+    </body>
+</html>
