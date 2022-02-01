@@ -1,26 +1,66 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Hello, WebVR! - A-Frame</title>
+      <title>WebVR! - A-Frame</title>
       <meta name="description" content="Hello, WebVR! - A-Frame">
+      
+      <link rel="stylesheet" href="css/user-gesture.css">
+
       <!--  note we are using 1.1.0 as most recent -->
       <script src="/js/aframe.min.js"></script>
       <script src="js/aframe-environment-component.min.js"></script>
-      <script src="js/spinning-effect.js"> </script>
+
+      <script>
+
+        AFRAME.registerComponent('kys', {
+          init: function () {
+            this.el.addEventListener('click', function (evt) {
+              var box = document.createElement("a-cylinder")
+              box.setAttribute("position", "2 0.5 0")
+              box.setAttribute("tagName", "lantern")
+              box.setAttribute("color", "orange")
+              box.setAttribute("height", "0.9")
+              box.setAttribute("radius", "0.4")
+              box.setAttribute("visible", "true")
+              //box.setAttribute("animation", "property:position.y; from:0.5; to:0.8; dur: 2000; dir: alternate; easing: linear; loop: true")
+              //box.setAttribute("animation__click", "property:position.y; from:0.5; to:0.8; dur: 2000; dir: alternate; easing: linear; loop: true")
+              document.querySelector("a-scene").appendChild(box)
+              console.log('bitch ass hoe');
+            });
+          }
+        });
+
+        AFRAME.registerComponent('lantern', {
+      init: function() {
+        this.el.addEventListener("click", (e) => {
+          console.log('pls die');
+        })
+      }
+    });
+
+    AFRAME.registerComponent('cajaverde', {
+      init: function() {
+        this.el.addEventListener("click", function (evt){
+          console.log('remove' );
+        })
+      }
+    });
+
+    </script>
 
     </head>
     <body>
-      <a-scene timeout="10000">
-        
+      <a-scene timeout="10000" cursor="rayOrigin: mouse">
+
         <a-entity id="camera_main" camera wasd-controls look-controls position="0 1.6 3">
-           <!-- <a-entity id="flashlight" light="type:spot; intensity:1.4; castShadow:true; shadowBias:-0.00005; angle:40; penumbra:0.3;" position="0.5 -0.5 0"></a-entity>-->
-          <a-entity cursor="rayOrigin:mouse;" raycaster="far:20; interval:30; objects:.interactive;"></a-entity>
-      </a-entity>    
+           <!-- <a-entity id="flashlight" light="type:spot; intensity:1.4; castShadow:true; shadowBias:-0.00005; angle:40; penumbra:0.3;" position="0.5 -0.5 0"></a-entity>
+          <a-entity cursor="rayOrigin:mouse;" raycaster="far:20; interval:30; objects:.interactive;"></a-entity>-->
+      </a-entity>
 
-        <a-cylinder color="orange" height="0.9" radius="0.4" position="3 0.5 0">
-        </a-cylinder>
+      <a-cylinder lantern visible="false" position="2 0.5 0" height= "0.9" radius= "0.4"></a-cylinder>
+      <a-box cajaverde id="cajaverde" position="-2 1 0" depth=".1" height="1" width="0.9"></a-box>
 
-        <a-entity id="universal_button">
+        <a-entity id="universal_button" kys>
           <a-entity class="button interactive" position="0 0.6 0" geometry="primitive:cylinder; radius:0.15; height:0.2;" material="color:rgb(255, 100, 100);" 
                     animation__mouseenter="property:material.color; type:color; to:rgb(255, 0, 0); startEvents:mouseenter; dur:200;"
                     animation__mouseleave="property:material.color; type:color; to:rgb(255, 100, 100); startEvents:mouseleave; dur:200;"
