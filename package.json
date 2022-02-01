@@ -1,7 +1,6 @@
 {
   "name": "lesson2_nodeaframeintro",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,6 +8,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
-  }
+    "express": "^4.17.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natalia199/IMD3901Assignment2.git"
+  },
+  "bugs": {
+    "url": "https://github.com/natalia199/IMD3901Assignment2/issues"
+  },
+  "homepage": "https://github.com/natalia199/IMD3901Assignment2#readme",
+  "description": ""
 }
