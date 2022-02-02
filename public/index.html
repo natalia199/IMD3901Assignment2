@@ -13,6 +13,9 @@
       <script src="https://mixedreality.mozilla.org/ammo.js/builds/ammo.wasm.js"></script>
       <script src="http://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
 
+      <script src="https://github.com/etiennepinchon/aframe-glow/blob/master/src/glow.js"></script>
+      <script src="https://github.com/etiennepinchon/aframe-glow/blob/master/dist/aframe-glow-component.js"></script>
+      <script src="https://github.com/etiennepinchon/aframe-glow/blob/master/dist/aframe-glow-component.min.js"></script>
     
       <script>
 
@@ -34,7 +37,7 @@ AFRAME.registerComponent('target-marker', {
       newMark.setAttribute('ammo-body', 'type:kinematic; emitCollisionEvents: true');
       newMark.setAttribute('ammo-shape', 'type:cylinder');
       //newMark.setAttribute('event-set__grab', '_event: mouseenter; ammo-body.type: kinematic');
-      //newMark.setAttribute('event-set__leave', '_event: mouseleave; ammo-body.emitCollisionEvents: true; material.color: black');
+      newMark.setAttribute('event-set__leave', '_event: mouseleave; ammo-body.emitCollisionEvents: true; material.color: black');
       scene.appendChild(newMark);
       }
 
@@ -78,11 +81,20 @@ AFRAME.registerComponent('dead', {
     el.addEventListener("collidestart", function (e) {
       el.setAttribute('material', 'color: orange');
       el.setAttribute('ammo-body', 'type:kinematic;');
-      el.setAttribute('gang', {});   
-      el.setAttribute('event-set__click', '_event: click; material.color: black}');
+      el.setAttribute('gang', {});
+      el.setAttribute('id', "whore");
+      //doSomething(el);
     });
   }
 });
+
+const onClick = (event) => {
+     if(event.srcElement.id == "whore"){
+       console.log("bye whore hate u");
+       event.srcElement.parentElement.removeChild(event.srcElement);
+          }
+} 
+window.addEventListener('click', onClick);
 
 
 AFRAME.registerComponent("gang", {
@@ -146,6 +158,8 @@ AFRAME.registerComponent("gang", {
 <a-box position="-3 1 0" color="blue" draggable
       event-set__drag="_event: drag-drop; _target: #pls"></a-box>
 
+      <a-box glow="enabled:true" position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+      <a-cylinder glow="side: front; scale:1.3; c: 1; p: 1.3; color: #FF00FF;" position="-3 0.75 -3" radius="0.5" height="1.5" color="white"></a-cylinder>
 
  <a-cylinder ammo-body="type:kinematic; emitCollisionEvents: true" ammo-shape="type:cylinder" position="3 1 -1" height="1" radius="0.15" color="#964B00" grabbable>
   <a-box ammo-body="type:kinematic; emitCollisionEvents: true" ammo-shape="type:box" position="0 0.5 0" height="0.5" width="0.5" depth="0.5" color="orange"></a-box>
