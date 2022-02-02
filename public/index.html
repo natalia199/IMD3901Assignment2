@@ -43,6 +43,7 @@ AFRAME.registerComponent('target-marker', {
       let newMark = document.createElement('a-sphere');
       newMark.setAttribute('gltf-model', '#lantern_model');
       newMark.setAttribute('radius', '0.5');
+      newMark.setAttribute('material', 'color:black');
       newMark.setAttribute('scale', '0.9 0.9 1');
       newMark.setAttribute('position', "1.2 1.2 -2");
       newMark.setAttribute('target-destroyer', {});
