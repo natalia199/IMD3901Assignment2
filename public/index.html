@@ -38,10 +38,10 @@ AFRAME.registerComponent('start-experience', {
         }
         const mobileExperience = function() {
           document.querySelector('#user-gesture-overlay').style.display='none';
-          var cam = document.getElementById("maincam");
-          cam.setAttribute("twoway-motion","speed: 10");
           var idk = document.getElementById("bitchass");
           idk.parentElement.removeChild(idk);
+          var cam = document.getElementById("maincam");
+          cam.setAttribute("twoway-motion","speed: 10");
         }
         const desktopExperience = function() {
           document.querySelector('#user-gesture-overlay').style.display='none';
