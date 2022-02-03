@@ -38,10 +38,9 @@ AFRAME.registerComponent('start-experience', {
         }
         const mobileExperience = function() {
           document.querySelector('#user-gesture-overlay').style.display='none';
-          var idk = document.getElementById("bitchass");
-          idk.parentElement.removeChild(idk);
           var cam = document.getElementById("maincam");
           cam.setAttribute("twoway-motion","speed: 10");
+          document.getElementById("bitchass").parentElement.removeChild(document.getElementById("bitchass"));
         }
         const desktopExperience = function() {
           document.querySelector('#user-gesture-overlay').style.display='none';
@@ -170,7 +169,7 @@ AFRAME.registerComponent("gang", {
 
        </a-assets>
 
-       <a-entity id="bitchass" progressive-controls></a-entity>
+       <a-entity id="bitchass" twoway-motion="speed: 10"></a-entity>
 
          <a-camera id="maincam">
           <a-entity cursor position="0 0 -1"
