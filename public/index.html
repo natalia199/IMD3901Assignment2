@@ -120,6 +120,10 @@ AFRAME.registerComponent("gang", {
           this.el.object3D.position.set(this.position.x, position + 0.01 * this.direction, this.position.z);
         }
       });
+
+      window.addEventListener('touchstart', function() {
+        alert("Hello\nHow are you?");
+      });
       
     </script>
 
