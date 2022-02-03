@@ -13,6 +13,8 @@
       <script src="https://mixedreality.mozilla.org/ammo.js/builds/ammo.wasm.js"></script>
       <script src="http://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
 
+      <script src="https://rawgit.com/Ctrl-Alt-Zen/aframe-mobile-controls/master/components/twoway-motion/twoway-motion.js"></script>
+      <script src="/js/twoway-motion.js"></script>
      <!-- <script src="https://rawgit.com/Ctrl-Alt-Zen/aframe-mobile-controls/master/components/twoway-motion/twoway-motion.js"></script>
       <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>-->
     
@@ -120,24 +122,6 @@ AFRAME.registerComponent("gang", {
           this.el.object3D.position.set(this.position.x, position + 0.01 * this.direction, this.position.z);
         }
       });
-
-      window.addEventListener('touchstart', function() {
-        var el = document.getElementsByTagName("cams");
-        this.el.object3D.position.set(position + 2 * this.direction, this.position.y, this.position.z);
-        //alert("Hello\nHow are you?");
-      });
-
-  function startup() {
-  var el = document.getElementById("cams");
-  el.addEventListener("touchstart", handleStart, false);
-  el.addEventListener("touchend", handleEnd, false);
-  el.addEventListener("touchcancel", handleCancel, false);
-  el.addEventListener("touchmove", handleMove, false);
-}
-
-document.addEventListener("DOMContentLoaded", startup);
-
-      
     </script>
 
     </head>
@@ -152,7 +136,7 @@ document.addEventListener("DOMContentLoaded", startup);
        </a-assets>
       <a-entity progressive-controls></a-entity>
 
-         <a-camera cams>
+         <a-camera  twoway-motion="speed: 35">
           <a-entity cursor position="0 0 -1"
                     geometry="primitive: sphere; radius:0.008"
                     material="color:black; shader:flat; opacity:0.5"></a-entity>
