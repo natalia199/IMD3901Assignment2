@@ -23,7 +23,6 @@
 
       <script>
 
-registerAframeClickDragComponent(window.AFRAME);
 
 AFRAME.registerComponent('target-marker', {
   init: function(){
@@ -142,15 +141,20 @@ AFRAME.registerComponent("gang", {
        </a-assets>
 
        <a-camera twoway-motion="speed: 10">
-        <a-entity cursor look-controls-enabled="false" position="0 0 -1"
-                  geometry="primitive: sphere; radius:0.05"
-                  material="color:black; shader:flat; opacity:0.5"></a-entity>
+        <a-entity cursor="rayOrigin:mouse;" raycaster="far:20; interval:200; objects:.interactive"
+        geometry="primitive: sphere; radius:0.05"
+        material="color:black; shader:flat; opacity:0.5"></a-entity>
+        
       </a-camera>
 
-      <a-sphere click-drag position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+      <a-sphere whore clickable position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
 
         <!--physics="driver: ammo; debug: false; debugDrawMode: 1;
 
+            <a-entity cursor look-controls-enabled="false" position="0 0 -1"
+                  geometry="primitive: sphere; radius:0.05"
+                  material="color:black; shader:flat; opacity:0.5"></a-entity>
+                  
         <a-entity id="bitchass"></a-entity>
 
          <a-camera id="maincam">

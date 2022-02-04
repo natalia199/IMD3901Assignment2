@@ -103,11 +103,15 @@ AFRAME.registerComponent("gang", {
     <a-scene environment="preset: forest; shadow: true" physics="driver:ammo;">
      
       <a-assets>
+        <audio id="space_music" src="/assets/SpaceMusic.mp3" preload="auto" crossorigin="anonymous"></audio>
+
         <a-asset-item id="lantern_model" response-type="arraybuffer" src="assets/models/scene.gltf"></a-asset-item>
         <a-asset-item id="torch_model" response-type="arraybuffer" src="assets/torch/scene.gltf"></a-asset-item>
         <a-asset-item id="btn_model" response-type="arraybuffer" src="assets/pedestal/scene.gltf"></a-asset-item>
 
        </a-assets>
+
+       <a-entity sound="src:#space_music; autoplay:true;"></a-entity>
 
        <a-entity progressive-controls></a-entity>
 
