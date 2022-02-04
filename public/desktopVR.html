@@ -19,10 +19,12 @@
       <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>-->
     
       <script>
-
+        
 AFRAME.registerComponent('target-marker', {
   init: function(){
     let el = this.el;
+
+    
 
     this.addMarker = function(e){
       let p = e.detail.intersection.point;
@@ -31,20 +33,18 @@ AFRAME.registerComponent('target-marker', {
       let newMark = document.createElement('a-sphere');
       newMark.setAttribute('gltf-model', '#lantern_model');
       newMark.setAttribute('radius', '0.5');
-      newMark.setAttribute('material', 'color:black');
+      newMark.setAttribute('material', 'color:black;');
       newMark.setAttribute('scale', '0.9 0.9 1');
       newMark.setAttribute('position', "1.2 1.2 -2");
       newMark.setAttribute('target-destroyer', {});
       newMark.setAttribute('grabbable', {});
       newMark.setAttribute('droppable', {});
+      newMark.setAttribute('shadow', {});
       newMark.setAttribute('id', 'pls');
       newMark.setAttribute('ammo-body', 'type:kinematic; emitCollisionEvents: true');
       newMark.setAttribute('ammo-shape', 'type:cylinder');
-      //newMark.setAttribute('event-set__grab', '_event: mouseenter; ammo-body.type: kinematic');
-      //newMark.setAttribute('event-set__leave', '_event: mouseleave; ammo-body.emitCollisionEvents: true; material.color: black');
       scene.appendChild(newMark);
       }
-
       this.el.addEventListener('click', this.addMarker);
     },
     remove: function(){
@@ -56,10 +56,19 @@ AFRAME.registerComponent('target-marker', {
   init: function() {
     var el = this.el;
     el.addEventListener("collidestart", function (e) {
-      el.setAttribute('material', 'color: orange');
+      el.setAttribute('material', 'color: orange; opacity:1');
       el.setAttribute('ammo-body', 'type:kinematic;');
       el.setAttribute('gang', {});
       el.setAttribute('id', "whore");
+      let newMark = document.createElement('a-entity');
+      newMark.setAttribute('light', 'type:point');
+      newMark.setAttribute('position', '0 -1 0');
+      newMark.setAttribute('material', 'color:orange, shader:flat');
+
+      el.appendChild(newMark);
+      
+      var audio = new Audio('assets/torchFlame.mp3');
+      audio.play();
       //doSomething(el);
     });
   }
@@ -68,6 +77,9 @@ AFRAME.registerComponent('target-marker', {
 const onClick = (event) => {
      if(event.srcElement.id == "whore"){
        console.log("bye whore hate u");
+       var light = event.srcElement.childNodes[0];
+       light.setAttribute("intensity", "0");
+       document.querySelector('a-scene').appendChild(light);
        event.srcElement.parentElement.removeChild(event.srcElement);
           }
 } 
@@ -100,18 +112,20 @@ AFRAME.registerComponent("gang", {
     </head>
     <body>
 
-    <a-scene environment="preset: forest; shadow: true" physics="driver:ammo;">
+    <a-scene environment="preset: starry; shadow: true" physics="driver:ammo;">
      
       <a-assets>
-        <audio id="space_music" src="/assets/SpaceMusic.mp3" preload="auto" crossorigin="anonymous"></audio>
-
+        <!--<audio id="space_music" src="assets/TangleSong.mp3" preload="auto" crossorigin="anonymous"></audio>-->
+        <!--<audio id="space_music" src="assets/torchFlame.mp3" preload="auto" crossorigin="anonymous"></audio>-->
+        
         <a-asset-item id="lantern_model" response-type="arraybuffer" src="assets/models/scene.gltf"></a-asset-item>
         <a-asset-item id="torch_model" response-type="arraybuffer" src="assets/torch/scene.gltf"></a-asset-item>
         <a-asset-item id="btn_model" response-type="arraybuffer" src="assets/pedestal/scene.gltf"></a-asset-item>
+        <a-asset-item id="bgMusic"  preload="auto" response-type="arraybuffer" src="assets/The Plight of the Samurai - Traditional Japanese Music.mp3"></a-asset-item>
 
        </a-assets>
 
-       <a-entity sound="src:#space_music; autoplay:true;"></a-entity>
+       <a-entity sound="src:#bgMusic; autoplay:true; volume:0.5;"></a-entity>
 
        <a-entity progressive-controls></a-entity>
 
@@ -154,9 +168,9 @@ AFRAME.registerComponent("gang", {
       event-set__drag="_event: drag-drop; _target: #pls; material.color: black;"></a-box>
 -->
 
-<a-plane color="black" scale="4 2 5" position="0 0.1 -2" rotation="-90 0 0"></a-plane>
- <a-cylinder ammo-body="type:kinematic; emitCollisionEvents: true" ammo-shape="type:cylinder" position="-2 1 -3" height="0.8" radius="0.15" color="#964B00" grabbable>
+ <a-cylinder ammo-body="type:kinematic; emitCollisionEvents: true" ammo-shape="type:cylinder" position="-2 1 -3" height="0.8" radius="0.15" color="#964B00" shadow grabbable>
   <a-entity gltf-model= "#torch_model" ammo-body="type:kinematic; emitCollisionEvents: true" ammo-shape="type:box" position="0 0.8 0" scale="0.5 0.5 0.5">
+    <a-entity id="lightSphere" position="0 -1 0" light="type: point" material="shader: flat; color: orange;"></a-entity>
   </a-entity>
  </a-cylinder>
       
