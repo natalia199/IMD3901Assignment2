@@ -9,7 +9,8 @@ const ABS_STATIC_PATH   = __dirname + '/public';
 
 //set our routes
 app.get('/', function (req, res) {
-    res.sendFile('desktopVR.html', {root:ABS_STATIC_PATH});
+    //res.sendFile('desktopVR.html', {root:ABS_STATIC_PATH});
+    res.sendFile('mobile_InteractVR.html', {root:ABS_STATIC_PATH});
 });
 
 server.listen(LISTEN_PORT);                         //starts server
